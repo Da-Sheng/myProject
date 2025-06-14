@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+.git
+.env
+.env.*
+pnpm-lock.yaml
+*.min.js
+*.min.css
+backstop_data
+coverage
+.nyc_output 
