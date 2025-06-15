@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const notifier = require('node-notifier')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { ThemedProgressPlugin } = require('themed-progress-plugin')
 
@@ -22,7 +23,7 @@ const devConfig = {
             template: path.resolve(__dirname, '../src/index.dev.html'),
             filename: 'index.html',
         }),
-        new BundleAnalyzerPlugin(),
+        // new BundleAnalyzerPlugin(),
         new ThemedProgressPlugin(),
         new FriendlyErrorsWebpackPlugin({
             clearConsole: true,
@@ -33,10 +34,10 @@ const devConfig = {
             onErrors: (severity, errors) => {
                 if (severity !== 'error') return
                 const error = errors[0]
-                console.log(error.err)
                 notifier.notify({
                     title: 'Webpack Error',
-                    message: severity + ': ' + error.err.message,
+                    message: severity + ': ' + error.name,
+                    subtitle: error.file || '',
                     sound: true
                 })
             }
