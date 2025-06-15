@@ -13,6 +13,9 @@ const baseConfig = {
   output: {
     path: path.resolve(__dirname, "dist"),
   },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.jsx']
+  },
   module: {
     rules: [
       {
