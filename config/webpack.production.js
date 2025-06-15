@@ -12,11 +12,9 @@ module.exports = {
     mode: 'production',
     // 配置外部依赖，不打包到bundle中
     externals: {
-        'react': 'React',
-        'react-dom': 'ReactDOM',
-        'react-dom/client': 'ReactDOM',
-        'react-router-dom': 'ReactRouterDOM',
-        'immer': 'immer'
+        'react': 'React',         // 将React库映射到全局变量React,表示使用外部CDN加载的React而不是打包到bundle中
+        'react-dom': 'ReactDOM',  // 将ReactDOM库映射到全局变量ReactDOM,表示使用外部CDN加载的ReactDOM
+        'react-dom/client': 'ReactDOM', // 将react-dom/client也映射到ReactDOM,因为它是ReactDOM的一部分
     },
     output: {
         // 设置输出目录为dist
