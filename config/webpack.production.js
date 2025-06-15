@@ -4,10 +4,20 @@ const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 // 引入Node.js的路径处理模块
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 
 module.exports = {
     // 设置为生产环境模式
     mode: 'production',
+    // 配置外部依赖，不打包到bundle中
+    externals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM',
+        'react-dom/client': 'ReactDOM',
+        'react-router-dom': 'ReactRouterDOM',
+        'immer': 'immer'
+    },
     output: {
         // 设置输出目录为dist
         path: path.resolve(__dirname, '../dist'),
@@ -30,6 +40,10 @@ module.exports = {
         // 启用代码压缩
         minimize: true,
         minimizer: [
+            new HtmlWebpackPlugin({
+                template: path.resolve(__dirname, '../src/index.prod.html'),
+                filename: 'index.html',
+            }),
             new TerserPlugin({
                 // 启用多进程并行压缩
                 parallel: true,
