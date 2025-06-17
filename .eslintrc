@@ -23,6 +23,14 @@
         "project": "./tsconfig.eslint.json"
     },
     "rules": {
-
+        "@typescript-eslint/no-explicit-any": "off",
+        "import/extensions": [
+            "warning",
+            "ignorePackages",
+            {
+                "ts": "never",
+                "tsx": "never"
+            }
+        ]
     }
 }

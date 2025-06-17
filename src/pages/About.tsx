@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getList } from '@/services';
 
 const About: React.FC = () => {
+  const [list, setList] = useState<any[]>([]);  
+  useEffect(() => {
+    getList().then((res) => {
+      setList(res?.data || []);
+    });
+  }, []);
   return (
     <div className='max-w-4xl mx-auto space-y-8'>
+      {list.map((item) => (
+        <div key={item.id}>{item.name}</div>
+      ))}
       <div className='text-center'>
         <h1 className='text-4xl font-bold text-gray-900'>关于我们</h1>
         <p className='mt-4 text-xl text-gray-600'>了解我们的故事、使命和团队</p>
